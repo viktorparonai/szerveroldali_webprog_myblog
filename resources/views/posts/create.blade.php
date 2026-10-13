@@ -8,7 +8,7 @@
         Új bejegyzés létrehozása</h2>
 
     <form action="{{ route('posts.store') }}" method="POST">
-        {{--ide valami lényeges jön--}}
+        @csrf
         Cím: @error('title')
             {{ $message }}
         @enderror

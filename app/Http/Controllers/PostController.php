@@ -29,8 +29,9 @@ class PostController extends Controller
         ]);
     }
 
-    public function edit(){
+    public function edit(Post $post){
         return view('posts.edit', [
+            'post' => $post,
             'users' => User::all(),
             'categories' => Category::all()
         ]);
@@ -52,7 +53,7 @@ class PostController extends Controller
         return redirect() -> route('posts.index');
     }
 
-    public function update(Request $request){
+    public function update(Request $request, Post $post){
         $validated = $request -> validate([
             'title' => 'required|string',
             'content' => 'required|string|min:10',
@@ -63,7 +64,8 @@ class PostController extends Controller
             'content.min' => 'A tartalom legalább 10 karakter kell legyen!'
         ]);
         $validated['is_public'] = $request -> has('is_public');
-        $post = Post::create($validated);
+        // $post = Post::create($validated);
+        $post -> update($validated);
         $post -> categories() -> sync($validated['categories'] ?? []);
         return redirect() -> route('posts.index');
     }

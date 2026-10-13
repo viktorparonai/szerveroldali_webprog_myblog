@@ -1,24 +1,25 @@
 @extends('bloglayout')
 
-@section('title', 'Új bejegyzés létrehozása')
+@section('title', $post->title . ' szerkesztése')
 
 @section('content')
 
     <h2 class="text-2xl">
-        Bejegyzés szerkesztése</h2>
+        {{$post -> title}} szerkesztése</h2>
 
-    <form action="{{ route('posts.update') }}" method="PATCH">
-        {{--ide valami lényeges jön--}}
+    <form action="{{ route('posts.update', ['post' => $post]) }}" method="POST">
+        @csrf
+        @method('PATCH')
         Cím: @error('title')
             {{ $message }}
         @enderror
         <br>
-        <input type="text" name="title" value="{{ old('title', '') }}" class="w-full"><br>
+        <input type="text" name="title" value="{{ old('title', $post->title) }}" class="w-full"><br>
         Tartalom: @error('content')
             {{ $message }}
         @enderror
         <br>
-        <textarea rows="5" name="content" class="w-full">{{ old('content', '') }}</textarea><br>
+        <textarea rows="5" name="content" class="w-full">{{ old('content', $post->content) }}</textarea><br>
         Szerző:
         <select name="author_id">
             @foreach ($users as $user)
