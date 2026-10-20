@@ -5,7 +5,15 @@
         <div class="bg-green-300 rounded mb-2 py-2 text-center">
             A(z) {{ Session::get('post-created') }} című bejegyzés létrehozva!
         </div>
-   	 @endif
+    @elseif (Session::has('post-updated'))
+            <div class="bg-green-300 rounded mb-2 py-2 text-center">
+                A(z) {{ Session::get('post-updated') }} című bejegyzés módosítva!
+            </div>
+    @elseif (Session::has('post-deleted'))
+        <div class="bg-green-300 rounded mb-2 py-2 text-center">
+            A(z) {{ Session::get('post-deleted') }} című bejegyzés törölve!
+        </div>
+   	@endif
     <ul>
         @foreach ($posts as $post)
             <li><a href="{{ route('posts.show', ['post' => $post ]) }}">{{ $post->title }}</a>

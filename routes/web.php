@@ -10,12 +10,16 @@ use App\Http\Controllers\PostController;
 //     return view('posts.index', ['posts' => $posts]);
 // });
 
-Route::get('/', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+// Route::get('/', [PostController::class, 'index'])->name('posts.index');
+// Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+// Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+// Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+// Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+// Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+// Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+Route::get('/', fn() => redirect() -> route('posts.index'));
+Route::resource('/posts',PostController::class); // ugyaz mint a fenti 7 kikommentelt
 
 Route::get('/dashboard', function () {
     return redirect() -> route('posts.index');

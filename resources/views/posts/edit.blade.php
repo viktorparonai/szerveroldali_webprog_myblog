@@ -20,12 +20,6 @@
         @enderror
         <br>
         <textarea rows="5" name="content" class="w-full">{{ old('content', $post->content) }}</textarea><br>
-        Szerző:
-        <select name="author_id">
-            @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
-            @endforeach
-        </select><br>
         Publikus? <input type="checkbox" name="is_public"><br>
 
         <h3 class="text-xl">Kategóriák</h3>
