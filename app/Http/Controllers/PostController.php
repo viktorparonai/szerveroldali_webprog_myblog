@@ -67,6 +67,12 @@ class PostController extends Controller
         Gate::authorize('update', $post);
         $validated = $request->validated();
         $validated['is_public'] = $request -> has('is_public');
+        if ($request->hasFile('image_file')) {
+            $file = $request->file('image_file');
+            $fileName = Str::uuid() . "." . $file->getClientOriginalExtension();
+            Storage::disk('public')->put("images/" . $fileName, $file->getContent());
+            $validated['image'] = $fileName;
+        }
         $post -> update($validated);
         $post -> categories() -> sync($validated['categories'] ?? []);
         Session::flash('post-updated', $post -> title);

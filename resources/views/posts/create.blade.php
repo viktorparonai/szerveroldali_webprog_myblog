@@ -21,6 +21,9 @@
         <textarea rows="5" name="content" class="w-full">{{ old('content', '') }}</textarea><br>
         Publikus? <input type="checkbox" name="is_public" value="1" {{ old('is_public') ? 'checked' : '' }}><br>
         Kép: <input type="file" name="image_file"><br>
+        @error('image_file')
+            <span style="color: red">{{ $message }}</span>
+        @enderror
         <h3 class="text-xl">Kategóriák</h3>
         @foreach ($categories as $category)
             <input type="checkbox" class="mr-2" name="categories[]" value="{{ $category->id }}"   {{ in_array($category -> id, old('categories',[])) ? "checked" : "" }}>
