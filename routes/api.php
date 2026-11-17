@@ -9,4 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/login', [ApiController::class, 'login']);
+Route::get('/posts', [ApiController::class, 'index']);
 Route::get('/posts/{post}', [ApiController::class, 'show']);
